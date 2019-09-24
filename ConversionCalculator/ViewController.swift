@@ -9,52 +9,68 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    private static let defaultLengthConversionKey = LengthConversionKey(toUnits: .Meters, fromUnits: .Yards)
     
-    private static let defaultVolumeConversionKey = VolumeConversionKey(toUnits: .Liters, fromUnits: .Gallons)
-    
-    @IBOutlet weak var input2: UITextField!
-    @IBOutlet weak var input1: UITextField!
-    @IBOutlet weak var label1: UILabel!
-    @IBOutlet weak var label2: UILabel!
-    @IBOutlet weak var calculateBtn: UIButton!
-    @IBOutlet weak var clearBtn: UIButton!
-    @IBOutlet weak var modeBtn: UIButton!
-    @IBOutlet weak var uiNavBar: UINavigationBar!
+    @IBOutlet weak var fromValueTextField: UITextField!
+    @IBOutlet weak var toValueTextField: UITextField!
+    @IBOutlet weak var fromUnitLabel: UILabel!
+    @IBOutlet weak var toUnitLabel: UILabel!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     var calculatorMode: CalculatorMode = .Length
-    var currentLengthConversionKey = defaultLengthConversionKey
-    var currentVolumeConversionKey = defaultVolumeConversionKey
     
+    var fromLengthUnit: LengthUnit = LengthUnit.Meters
+    var toLengthUnit: LengthUnit = LengthUnit.Yards
+    
+    var fromVolumeUnit: VolumeUnit = VolumeUnit.Liters
+    var toVolumeUnit: VolumeUnit = VolumeUnit.Gallons
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.title = "Length Conversion Calculator"
+        
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        if input1.text != nil && input2.text == nil {
-            if let input1Double = Double(input1.text!){
-                self.input2.text = String(lengthConversionTable[LengthConversionKey(toUnits: .Meters, fromUnits: .Yards)]! * input1Double)
+        if fromValueTextField.text == "" && toValueTextField.text != "" {
+            if let toValue = Double(toValueTextField.text!) {
+                if calculatorMode == .Length {
+                    fromValueTextField.text = String(lengthConversionTable[LengthConversionKey(toUnits: fromLengthUnit, fromUnits: toLengthUnit)]! * toValue)
+                } else {
+                    fromValueTextField.text = String(volumeConversionTable[VolumeConversionKey(toUnits: fromVolumeUnit, fromUnits: toVolumeUnit)]! * toValue)
+                }
             }
-        } else {
-            if let input2Double = Double(input2.text!){
-                self.input1.text = String(lengthConversionTable[LengthConversionKey(toUnits: .Meters, fromUnits: .Yards)]! * input2Double)
+        } else if fromValueTextField.text != "" {
+            if let toValue = Double(fromValueTextField.text!) {
+                if calculatorMode == .Length {
+                    toValueTextField.text = String(lengthConversionTable[LengthConversionKey(toUnits: toLengthUnit, fromUnits: fromLengthUnit)]! * toValue)
+                } else {
+                    toValueTextField.text = String(volumeConversionTable[VolumeConversionKey(toUnits: toVolumeUnit, fromUnits: fromVolumeUnit)]! * toValue)
+                }
             }
         }
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
-        input1.text = ""
-        input2.text = ""
+        fromValueTextField.text = ""
+        toValueTextField.text = ""
     }
     
     @IBAction func modeButtonTapped(_ sender: UIButton) {
         switch (calculatorMode) {
-        case .Length:
-            calculatorMode = .Volume
         case .Volume:
             calculatorMode = .Length
+            fromUnitLabel.text = fromLengthUnit.rawValue
+            toUnitLabel.text = toLengthUnit.rawValue
+            fromValueTextField.placeholder = "Enter length in \(fromLengthUnit.rawValue)"
+            toValueTextField.placeholder = "Enter length in \(toLengthUnit.rawValue)"
+            self.title = "Length Conversion Calculator"
+        case .Length:
+            calculatorMode = .Volume
+            fromUnitLabel.text = fromVolumeUnit.rawValue
+            toUnitLabel.text = toVolumeUnit.rawValue
+            fromValueTextField.placeholder = "Enter volume in \(fromVolumeUnit.rawValue)"
+            toValueTextField.placeholder = "Enter volume in \(toVolumeUnit.rawValue)"
+            self.title = "Volume Conversion Calculator"
         }
     }
 }
