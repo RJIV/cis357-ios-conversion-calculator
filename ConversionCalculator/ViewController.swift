@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private static let defaultLengthConversionKey = LengthConversionKey(toUnits: .Meters, fromUnits: .Yards)
+    
+    private static let defaultVolumeConversionKey = VolumeConversionKey(toUnits: .Liters, fromUnits: .Gallons)
     
     @IBOutlet weak var input2: UITextField!
     @IBOutlet weak var input1: UITextField!
@@ -20,14 +23,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var modeBtn: UIButton!
     @IBOutlet weak var uiNavBar: UINavigationBar!
     
-    var calculatorMode: CalculatorMode! = .Length
+    var calculatorMode: CalculatorMode = .Length
+    var currentLengthConversionKey = defaultLengthConversionKey
+    var currentVolumeConversionKey = defaultVolumeConversionKey
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func calculateBtn(_ sender: UIButton) {
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
         if input1.text != nil && input2.text == nil {
             if let input1Double = Double(input1.text!){
                 self.input2.text = String(lengthConversionTable[LengthConversionKey(toUnits: .Meters, fromUnits: .Yards)]! * input1Double)
@@ -39,16 +44,18 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearInputs(_ sender: UIButton) {
+    @IBAction func clearButtonTapped(_ sender: UIButton) {
         input1.text = ""
         input2.text = ""
     }
-
-    @IBAction func settingsBtnTapped(_ sender: UIButton) {
-
+    
+    @IBAction func modeButtonTapped(_ sender: UIButton) {
+        switch (calculatorMode) {
+        case .Length:
+            calculatorMode = .Volume
+        case .Volume:
+            calculatorMode = .Length
+        }
     }
-
-
-
 }
 
