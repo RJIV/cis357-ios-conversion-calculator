@@ -15,40 +15,114 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var toUnitsLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     
+    var currentLabel: UILabel?
+    
+    var pickerData = [String]()
+    var selection: String = "Meters"
+    
+    var fromLengthUnits: LengthUnit = .Meters
+    var toLengthUnits: LengthUnit = .Yards
+    
+    var fromVolumeUnits: VolumeUnit = .Liters
+    var toVolumeUnits: VolumeUnit = .Gallons
+    
+    var editingState: EditingState = .None
+    
+    var calculatorMode: CalculatorMode = .Length
+    
+    var settingsViewControllerDelegate: SettingsViewControllerDelegate?
+    
+    enum EditingState {
+        case None
+        case From
+        case To
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let viewTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.viewTapped(_:)))
+        let fromTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.fromUnitsLabelTapped(_:)))
+        let toTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.toUnitsLabelTapped(_:)))
+        fromUnitsLabel.addGestureRecognizer(fromTap)
+        toUnitsLabel.addGestureRecognizer(toTap)
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(viewTap)
+        
+        switch calculatorMode {
+        case .Length:
+            pickerData = LengthUnit.allCases.map{ $0.rawValue }
+            fromUnitsLabel.text = fromLengthUnits.rawValue
+            toUnitsLabel.text = toLengthUnits.rawValue
+        case .Volume:
+            pickerData = VolumeUnit.allCases.map{ $0.rawValue }
+            fromUnitsLabel.text = fromVolumeUnits.rawValue
+            toUnitsLabel.text = toVolumeUnits.rawValue
+        }
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.isHidden = true
     }
     
-    private func togglePickerViewVisibility() {
-        pickerView.isHidden = !pickerView.isHidden
+    @objc func viewTapped(_ sender: UITapGestureRecognizer) {
+        pickerView.isHidden = true
     }
     
-    @IBAction func fromUnitsLabelTapped(_ sender: UILabel) {
-        togglePickerViewVisibility()
+    @objc func fromUnitsLabelTapped(_ sender: UITapGestureRecognizer) {
+        pickerView.isHidden = false
+        editingState = .From
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func toUnitsLabelTapped(_ sender: UITapGestureRecognizer) {
+        pickerView.isHidden = false
+        editingState = .To
     }
-    */
-
+    
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        if let delegate = settingsViewControllerDelegate {
+            switch calculatorMode {
+            case .Length:
+                delegate.settingsChanged(fromUnits: fromLengthUnits, toUnits: toLengthUnits)
+            case .Volume:
+                delegate.settingsChanged(fromUnits: fromVolumeUnits, toUnits: toVolumeUnits)
+            }
+            
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
 }
 
 extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 0
+        return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 0
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selection: String = pickerData[row]
+        switch (calculatorMode, editingState) {
+        case (.Length, .From):
+            fromLengthUnits = LengthUnit(rawValue: selection)!
+            fromUnitsLabel.text = selection
+        case (.Length, .To):
+            toLengthUnits = LengthUnit(rawValue: selection)!
+            toUnitsLabel.text = selection
+        case (.Volume, .From):
+            fromVolumeUnits = VolumeUnit(rawValue: selection)!
+            fromUnitsLabel.text = selection
+        case (.Volume, .To):
+            toVolumeUnits = VolumeUnit(rawValue: selection)!
+            toUnitsLabel.text = selection
+        default:
+            return
+        }
     }
 }
