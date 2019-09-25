@@ -18,7 +18,6 @@ class SettingsViewController: UIViewController {
     var currentLabel: UILabel?
     
     var pickerData = [String]()
-    var selection: String = "Meters"
     
     var fromLengthUnits: LengthUnit = .Meters
     var toLengthUnits: LengthUnit = .Yards
