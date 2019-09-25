@@ -35,6 +35,11 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Cancel"
+        navigationItem.backBarButtonItem = backItem
+        
         switch segue.identifier {
         case "changeSettingsSegue":
             if let dest = segue.destination as? SettingsViewController {
