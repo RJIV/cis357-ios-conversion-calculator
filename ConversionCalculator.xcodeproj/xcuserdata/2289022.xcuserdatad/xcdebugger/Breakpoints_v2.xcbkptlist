@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConversionCalculator/ViewController.swift"
-            timestampString = "591123301.319425"
+            timestampString = "591694724.0087349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "calculateButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>

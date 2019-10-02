@@ -43,10 +43,12 @@ class SettingsViewController: UIViewController {
         let viewTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.viewTapped(_:)))
         let fromTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.fromUnitsLabelTapped(_:)))
         let toTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.toUnitsLabelTapped(_:)))
+        
         fromUnitsLabel.addGestureRecognizer(fromTap)
         toUnitsLabel.addGestureRecognizer(toTap)
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(viewTap)
+        
         
         switch calculatorMode {
         case .Length:

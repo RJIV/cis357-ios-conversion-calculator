@@ -27,6 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Length Conversion Calculator"
+        self.view.backgroundColor = BACKGROUND_COLOR
         
         fromValueTextField.delegate = self
         toValueTextField.delegate = self
