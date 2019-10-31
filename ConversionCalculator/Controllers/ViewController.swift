@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControllerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControllerDelegate, HistoryTableViewControllerDelegate {
     
     @IBOutlet weak var fromValueTextField: UITextField!
     @IBOutlet weak var toValueTextField: UITextField!
@@ -23,6 +23,12 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
     
     var fromVolumeUnits: VolumeUnit = VolumeUnit.Liters
     var toVolumeUnits: VolumeUnit = VolumeUnit.Gallons
+    
+    var entries : [Conversion] = [
+            Conversion(fromVal: 1, toVal: 1760, mode: .Length, fromUnits: LengthUnit.Miles.rawValue, toUnits:
+    LengthUnit.Yards.rawValue, timestamp: Date.distantPast),
+            Conversion(fromVal: 1, toVal: 4, mode: .Volume, fromUnits: VolumeUnit.Gallons.rawValue, toUnits:
+    VolumeUnit.Quarts.rawValue, timestamp: Date.distantFuture)]
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +41,25 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
         refreshUnitLabels()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func selectEntry(entry: Conversion) {
+        calculatorMode = entry.mode
+        fromValueTextField.text = String(entry.fromVal)
+        toValueTextField.text = String(entry.toVal)
         
+        if calculatorMode == .Length {
+            fromLengthUnits = LengthUnit(rawValue: entry.fromUnits)!
+            toLengthUnits = LengthUnit(rawValue: entry.toUnits)!
+            self.title = "Length Conversion Calculator"
+        } else {
+            fromVolumeUnits = VolumeUnit(rawValue: entry.fromUnits)!
+            toVolumeUnits = VolumeUnit(rawValue: entry.toUnits)!
+            self.title = "Volume Conversion Calculator"
+        }
+        
+        refreshUnitLabels()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Cancel"
         navigationItem.backBarButtonItem = backItem
@@ -50,6 +73,11 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
                 dest.toLengthUnits = toLengthUnits
                 dest.fromVolumeUnits = fromVolumeUnits
                 dest.toVolumeUnits = toVolumeUnits
+            }
+        case "viewHistorySegue":
+            if let dest = segue.destination as? HistoryTableViewController {
+                dest.historyTableViewControllerDelegate = self
+                dest.entries = entries
             }
         default:
             return
@@ -78,6 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        var validEntry = false
         if fromValueTextField.text == "" && toValueTextField.text != "" {
             if let toValue = Double(toValueTextField.text!) {
                 if calculatorMode == .Length {
@@ -85,6 +114,7 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
                 } else {
                     fromValueTextField.text = String(volumeConversionTable[VolumeConversionKey(toUnits: fromVolumeUnits, fromUnits: toVolumeUnits)]! * toValue)
                 }
+                validEntry = true
             }
         } else if fromValueTextField.text != "" {
             if let toValue = Double(fromValueTextField.text!) {
@@ -93,7 +123,21 @@ class ViewController: UIViewController, UITextFieldDelegate, SettingsViewControl
                 } else {
                     toValueTextField.text = String(volumeConversionTable[VolumeConversionKey(toUnits: toVolumeUnits, fromUnits: fromVolumeUnits)]! * toValue)
                 }
+                validEntry = true
             }
+        }
+        
+        if validEntry {
+            let entry = Conversion(
+                fromVal: Double(fromValueTextField.text!)!,
+                toVal: Double(toValueTextField.text!)!,
+                mode: calculatorMode,
+                fromUnits: fromUnitLabel.text!,
+                toUnits: toUnitLabel.text!,
+                timestamp: Date()
+            )
+            entries.append(entry)
+            print(entries)
         }
     }
     

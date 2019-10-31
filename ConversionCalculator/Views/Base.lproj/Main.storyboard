@@ -1,16 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HHl-yE-iSv">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wtP-KG-Eqj">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="gfA-fY-RbS">
+            <objects>
+                <navigationController id="wtP-KG-Eqj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Kr-AY-ZCW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ss5-jI-XWe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8sX-YP-qo8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101" y="122"/>
+        </scene>
+        <!--History Table View Controller-->
+        <scene sceneID="tUM-0e-ngH">
+            <objects>
+                <tableViewController id="coB-ea-bKq" customClass="HistoryTableViewController" customModule="ConversionCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CVA-nZ-4VC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellId" textLabel="vNc-O9-ZpM" detailTextLabel="cYg-1s-quj" style="IBUITableViewCellStyleSubtitle" id="zkj-C1-phk">
+                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zkj-C1-phk" id="Gxz-As-obq">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vNc-O9-ZpM">
+                                            <rect key="frame" x="20" y="10" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cYg-1s-quj">
+                                            <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FancyCell" rowHeight="60" id="Qqt-iW-A7T" customClass="HistoryTableViewCell" customModule="ConversionCalculator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="83.5" width="414" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qqt-iW-A7T" id="x5Q-U8-Qx3">
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="60"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2R3-5X-uVy">
+                                            <rect key="frame" x="88" y="33" width="290" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="7gW-8L-a8z">
+                                            <rect key="frame" x="20" y="5" width="48" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="Nkf-j5-nJI"/>
+                                                <constraint firstAttribute="width" constant="48" id="j8c-kS-t3z"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conversion info goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kax-YZ-OZo">
+                                            <rect key="frame" x="88" y="5" width="290" height="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="2R3-5X-uVy" firstAttribute="leading" secondItem="7gW-8L-a8z" secondAttribute="trailing" constant="20" id="8uV-J0-ACm"/>
+                                        <constraint firstAttribute="bottom" secondItem="7gW-8L-a8z" secondAttribute="bottom" constant="5" id="JnR-fU-cN8"/>
+                                        <constraint firstAttribute="trailing" secondItem="2R3-5X-uVy" secondAttribute="trailing" constant="5" id="OEZ-8f-Peo"/>
+                                        <constraint firstItem="Kax-YZ-OZo" firstAttribute="leading" secondItem="7gW-8L-a8z" secondAttribute="trailing" constant="20" id="azF-bw-cvV"/>
+                                        <constraint firstItem="Kax-YZ-OZo" firstAttribute="top" secondItem="x5Q-U8-Qx3" secondAttribute="top" constant="5" id="bKh-CJ-WDu"/>
+                                        <constraint firstAttribute="bottom" secondItem="2R3-5X-uVy" secondAttribute="bottom" constant="9" id="boD-V4-Jl4"/>
+                                        <constraint firstItem="7gW-8L-a8z" firstAttribute="top" secondItem="x5Q-U8-Qx3" secondAttribute="top" constant="5" id="leu-mB-eMQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="Kax-YZ-OZo" secondAttribute="trailing" constant="5" id="rL3-IF-QB6"/>
+                                        <constraint firstItem="7gW-8L-a8z" firstAttribute="leading" secondItem="x5Q-U8-Qx3" secondAttribute="leading" constant="20" id="t16-Oc-sP8"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="conversionLabel" destination="Kax-YZ-OZo" id="leF-gg-WB8"/>
+                                    <outlet property="thumbnail" destination="7gW-8L-a8z" id="Chl-uD-Uv5"/>
+                                    <outlet property="timestampLabel" destination="2R3-5X-uVy" id="QxW-QE-4UK"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="coB-ea-bKq" id="CJh-B2-eA1"/>
+                            <outlet property="delegate" destination="coB-ea-bKq" id="nCQ-ye-j9W"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="KWX-km-jR9"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mfv-JJ-Rvr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902.8985507246377" y="-560.49107142857144"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -40,13 +144,6 @@
                                     <action selector="modeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mu8-bT-e2Q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGZ-9q-u69" customClass="ConversionCalcButton" customModule="ConversionCalculator" customModuleProvider="target">
-                                <rect key="frame" x="155.5" y="816" width="103.5" height="30"/>
-                                <state key="normal" title="Settings"/>
-                                <connections>
-                                    <segue destination="A92-WR-dyR" kind="show" identifier="changeSettingsSegue" id="UIe-c5-Dn0"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oDR-Vl-BNE" userLabel="Vertical Stack View">
                                 <rect key="frame" x="8" y="96" width="398" height="184"/>
                                 <subviews>
@@ -62,7 +159,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter length in yards" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="8R4-Bt-Vqs" customClass="ConversionCalcTextField" customModule="ConversionCalculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7O-eC-Giu" customClass="ConversionCalcLabel" customModule="ConversionCalculator" customModuleProvider="target">
                                                 <rect key="frame" x="203" y="0.0" width="195" height="40"/>
@@ -87,7 +184,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter length in meters" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="cub-UU-MAG" customClass="ConversionCalcTextField" customModule="ConversionCalculator" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTr-CJ-MmE" customClass="ConversionCalcLabel" customModule="ConversionCalculator" customModuleProvider="target">
                                                 <rect key="frame" x="203" y="0.0" width="195" height="40"/>
@@ -107,14 +204,11 @@
                         <constraints>
                             <constraint firstItem="oDR-Vl-BNE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="GR9-S3-tDI"/>
                             <constraint firstItem="oDR-Vl-BNE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="Gmu-Kz-HqI"/>
-                            <constraint firstItem="GGZ-9q-u69" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K7v-MZ-wSw"/>
                             <constraint firstItem="S1n-Wp-utP" firstAttribute="top" secondItem="oDR-Vl-BNE" secondAttribute="bottom" constant="8" id="Lhc-Ru-5xh"/>
                             <constraint firstItem="kWp-n2-kn8" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:4" id="Mn2-nG-yih"/>
                             <constraint firstItem="MCu-fp-TCz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TgA-3a-ASb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kWp-n2-kn8" secondAttribute="trailing" constant="8" id="U9m-7o-ee8"/>
-                            <constraint firstItem="GGZ-9q-u69" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:4" id="Wx8-LG-gcK"/>
                             <constraint firstItem="MCu-fp-TCz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:4" id="WxW-SD-pRg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GGZ-9q-u69" secondAttribute="bottom" constant="16" id="haI-Wi-cf5"/>
                             <constraint firstItem="S1n-Wp-utP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:4" id="j4F-Gk-Y4R"/>
                             <constraint firstAttribute="trailing" secondItem="oDR-Vl-BNE" secondAttribute="trailing" constant="8" id="kYu-MU-Jqh"/>
                             <constraint firstItem="kWp-n2-kn8" firstAttribute="top" secondItem="oDR-Vl-BNE" secondAttribute="bottom" constant="8" id="qLv-Gy-XoI"/>
@@ -123,7 +217,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="k21-xK-Vf2"/>
+                    <navigationItem key="navigationItem" id="k21-xK-Vf2">
+                        <barButtonItem key="leftBarButtonItem" title="History" id="KMC-GE-kSU">
+                            <connections>
+                                <segue destination="coB-ea-bKq" kind="show" identifier="viewHistorySegue" id="8E3-1p-YVc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="YYe-Re-0DR">
+                            <connections>
+                                <segue destination="A92-WR-dyR" kind="show" identifier="changeSettingsSegue" id="tlY-2S-3KA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="fromUnitLabel" destination="e7O-eC-Giu" id="bnF-To-cVN"/>
                         <outlet property="fromValueTextField" destination="8R4-Bt-Vqs" id="zDk-dv-PXg"/>
@@ -133,25 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044.9275362318842" y="105.80357142857143"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="7XS-u1-fsL">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HHl-yE-iSv" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lBt-56-as8">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Y83-N1-c0Q"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dLv-fS-bqx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="134.78260869565219" y="105.80357142857143"/>
+            <point key="canvasLocation" x="964" y="122"/>
         </scene>
         <!--Settings-->
         <scene sceneID="G9X-xj-BxU">
@@ -233,7 +320,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewa-f1-2aG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1908.6956521739132" y="105.80357142857143"/>
+            <point key="canvasLocation" x="1902.8985507246377" y="121.875"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image" width="48" height="48"/>
+    </resources>
 </document>
